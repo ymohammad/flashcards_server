@@ -1,5 +1,5 @@
 /*******************************************************************************************************************************
-Category.java
+CategoryRequest.java
 
 Copyright © 2021, Power Integrations Corporation. All rights reserved.
 The Programs (which include both the software and documentation) contain proprietary information of Power Integrations Corporation;
@@ -15,55 +15,24 @@ reproduced or transmitted in any form or by any means, electronic or mechanical,
 written permission of Power Integrations Corporation.
 
 Author : ymohammad
-Date   : Apr 25, 2021
+Date   : Apr 26, 2021
 
 Last modified by : ymohammad
-Last modified on : Apr 25, 2021
+Last modified on : Apr 26, 2021
 
 *******************************************************************************************************************************/
 
-package in.droidsoft.flashcards.model.category;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+package in.droidsoft.flashcards.dto;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
-* Class Category
+* Class CategoryRequest
 */
-@Entity
-@Table(name = "T_CATEGORIES")
 @Data
-@NoArgsConstructor
-public class Category implements Serializable {
-    
-    private static final long serialVersionUID = 5865249698700559417L;
-    
-    @Id
-    @SequenceGenerator(name = "category_s", sequenceName = "category_s")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_s")
-    @Column(name = "category_id")
-    private Long categoryId;
-    
-    @Column(name = "category_name")
+public class CategoryRequest {
+
     private String categoryName;
-    
-    @Column(name = "description")
     private String description;
-    
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
-    
-    @Column(name = "created_by")
-    private Long createdBy;
+    private String userName;
 }

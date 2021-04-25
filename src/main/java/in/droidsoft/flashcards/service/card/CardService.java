@@ -1,5 +1,5 @@
 /*******************************************************************************************************************************
-Category.java
+CardService.java
 
 Copyright © 2021, Power Integrations Corporation. All rights reserved.
 The Programs (which include both the software and documentation) contain proprietary information of Power Integrations Corporation;
@@ -15,55 +15,57 @@ reproduced or transmitted in any form or by any means, electronic or mechanical,
 written permission of Power Integrations Corporation.
 
 Author : ymohammad
-Date   : Apr 25, 2021
+Date   : Apr 26, 2021
 
 Last modified by : ymohammad
-Last modified on : Apr 25, 2021
+Last modified on : Apr 26, 2021
 
 *******************************************************************************************************************************/
 
-package in.droidsoft.flashcards.model.category;
+package in.droidsoft.flashcards.service.card;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import in.droidsoft.flashcards.model.card.CardType;
+import in.droidsoft.flashcards.repository.card.CardTypeRepository;
+import in.droidsoft.flashcards.utils.ApplicationUtils;
 
 /**
-* Class Category
+* Class CardService
 */
-@Entity
-@Table(name = "T_CATEGORIES")
-@Data
-@NoArgsConstructor
-public class Category implements Serializable {
+@Service
+public class CardService {
     
-    private static final long serialVersionUID = 5865249698700559417L;
+    @Autowired private CardTypeRepository cardTypeRepo;
     
-    @Id
-    @SequenceGenerator(name = "category_s", sequenceName = "category_s")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_s")
-    @Column(name = "category_id")
-    private Long categoryId;
-    
-    @Column(name = "category_name")
-    private String categoryName;
-    
-    @Column(name = "description")
-    private String description;
-    
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
-    
-    @Column(name = "created_by")
-    private Long createdBy;
+    public List<CardType> getAllCardTypes() {
+	return this.cardTypeRepo.findAll();
+    }
+    /**
+     * Create new Card Types.
+     * @param cardTypeCode
+     * @param description
+     * @return
+     * @throws Exception
+     */
+    public CardType createNewCardType(String cardTypeCode, String description) throws Exception {
+	if (ApplicationUtils.isEmpty(cardTypeCode)) {
+	    throw new Exception("Card Type Code is required.");
+	}
+	if (ApplicationUtils.isEmpty(description)) {
+	    throw new Exception("Card Type Description is required.");
+	}
+	
+	CardType type = new CardType();
+	type.setCardTypeCode(cardTypeCode);
+	type.setDescription(description);
+	type.setCreatedDate(LocalDateTime.now());
+	
+	CardType savedCardType = this.cardTypeRepo.save(type);
+	return savedCardType;
+    }
 }

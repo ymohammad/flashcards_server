@@ -29,7 +29,10 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -47,6 +50,8 @@ public class CardType implements Serializable {
     private static final long serialVersionUID = 3249940833257263561L;
 
     @Id
+    @SequenceGenerator(name = "card_type_s", sequenceName = "card_type_s")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "card_type_s")
     @Column(name = "card_type_id")
     private Long cardTypeId;
     

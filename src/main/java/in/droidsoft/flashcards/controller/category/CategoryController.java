@@ -1,5 +1,5 @@
 /*******************************************************************************************************************************
-Category.java
+CategoryController.java
 
 Copyright © 2021, Power Integrations Corporation. All rights reserved.
 The Programs (which include both the software and documentation) contain proprietary information of Power Integrations Corporation;
@@ -22,48 +22,10 @@ Last modified on : Apr 25, 2021
 
 *******************************************************************************************************************************/
 
-package in.droidsoft.flashcards.model.category;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package in.droidsoft.flashcards.controller.category;
 
 /**
-* Class Category
+* Class CategoryController
 */
-@Entity
-@Table(name = "T_CATEGORIES")
-@Data
-@NoArgsConstructor
-public class Category implements Serializable {
-    
-    private static final long serialVersionUID = 5865249698700559417L;
-    
-    @Id
-    @SequenceGenerator(name = "category_s", sequenceName = "category_s")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_s")
-    @Column(name = "category_id")
-    private Long categoryId;
-    
-    @Column(name = "category_name")
-    private String categoryName;
-    
-    @Column(name = "description")
-    private String description;
-    
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
-    
-    @Column(name = "created_by")
-    private Long createdBy;
+public class CategoryController {
 }
