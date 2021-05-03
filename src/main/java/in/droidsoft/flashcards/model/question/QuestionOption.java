@@ -26,10 +26,15 @@ package in.droidsoft.flashcards.model.question;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -45,6 +50,9 @@ public class QuestionOption {
     
     @Id
     @Column(name = "option_id")
+    @JsonIgnore
+    @SequenceGenerator(name = "question_option_s", sequenceName = "question_option_s")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "question_option_s")
     private Long optionId;
     
     @Column(name = "option_text")
@@ -55,5 +63,6 @@ public class QuestionOption {
     
     @ManyToOne (targetEntity = Question.class)
     @JoinColumn(name = "question_id", nullable=false)
+    @JsonIgnore
     private Long questionId;
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************************************************************
-CategoryController.java
+QuestionController.java
 
 Copyright © 2021, DroidSoft Corporation. All rights reserved.
 The Programs (which include both the software and documentation) contain proprietary information of DroidSoft Corporation;
@@ -15,62 +15,44 @@ reproduced or transmitted in any form or by any means, electronic or mechanical,
 written permission of DroidSoft Corporation.
 
 Author : ymohammad
-Date   : Apr 25, 2021
+Date   : Apr 28, 2021
 
 Last modified by : ymohammad
-Last modified on : Apr 25, 2021
+Last modified on : Apr 28, 2021
 
 *******************************************************************************************************************************/
 
-package in.droidsoft.flashcards.controller.category;
+package in.droidsoft.flashcards.controller.question;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.droidsoft.flashcards.dto.ApiResponseObject;
-import in.droidsoft.flashcards.dto.CategoryRequest;
-import in.droidsoft.flashcards.model.category.Category;
-import in.droidsoft.flashcards.service.category.CategoryService;
+import in.droidsoft.flashcards.model.question.Question;
+import in.droidsoft.flashcards.service.question.QuestionService;
 import in.droidsoft.flashcards.utils.ApplicationUtils;
 
 /**
-* Class CategoryController
+* Class QuestionController
 */
 @RestController
-@RequestMapping("/api/category")
-public class CategoryController {
+@RequestMapping("/api/question")
+public class QuestionController {
+
+    @Autowired private QuestionService questionService;
     
-    @Autowired private CategoryService categoryService;
-    
-    @GetMapping("/all")
-    public ApiResponseObject getAllCategories() {
+    @GetMapping("/user/{userName}")
+    public ApiResponseObject getUserQuestions(@PathVariable(value = "userName") String userName) {
 	ApiResponseObject returnObj = null;
 	try {
-	    System.out.println("CategoryController.getAllCategories() received request.");
-	    List<Category> categoryList = this.categoryService.getAllCategories();
-	    returnObj = ApplicationUtils.prepareStandardAPIBeanResponse(categoryList, null, "Categories list.");
-	} catch (Exception ex) {
-	    ex.printStackTrace();
-	    returnObj = ApplicationUtils.prepareStandardAPIBeanResponse(null, ex, null);
-	}
-	return returnObj;
-    }
-    
-    @PostMapping("/createCategory")
-    public ApiResponseObject createNewCardType(CategoryRequest categoryReq) {
-	ApiResponseObject returnObj = null;
-	try {
-	    System.out.println("CategoryController.createNewCardType() received request.");
-	    if (categoryReq == null) {
-		throw new Exception("Invalid payload to create Category.");
-	    }
-	    Category createNewCategory = this.categoryService.createNewCategory(categoryReq);
-	    returnObj = ApplicationUtils.prepareStandardAPIBeanResponse(createNewCategory, null, "Category is created successfully.");
+	    System.out.println("QuestionController.getAllQuestions() received request.");
+	    List<Question> questionsList = this.questionService.getUserQuestions(userName);
+	    returnObj = ApplicationUtils.prepareStandardAPIBeanResponse(questionsList, null, "Questions list.");
 	} catch (Exception ex) {
 	    ex.printStackTrace();
 	    returnObj = ApplicationUtils.prepareStandardAPIBeanResponse(null, ex, null);

@@ -1,5 +1,5 @@
 /*******************************************************************************************************************************
-ApiResponseObject.java
+QuestionService.java
 
 Copyright © 2021, DroidSoft Corporation. All rights reserved.
 The Programs (which include both the software and documentation) contain proprietary information of DroidSoft Corporation;
@@ -15,25 +15,34 @@ reproduced or transmitted in any form or by any means, electronic or mechanical,
 written permission of DroidSoft Corporation.
 
 Author : ymohammad
-Date   : Apr 25, 2021
+Date   : Apr 28, 2021
 
 Last modified by : ymohammad
-Last modified on : Apr 25, 2021
+Last modified on : Apr 28, 2021
 
 *******************************************************************************************************************************/
 
-package in.droidsoft.flashcards.dto;
+package in.droidsoft.flashcards.service.question;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import in.droidsoft.flashcards.model.question.Question;
 
 /**
-* Class ApiResponseObject
+* Class QuestionService
 */
-@Data
-@NoArgsConstructor
-public class ApiResponseObject {
-    private String msg;
-    private Object data;
-    private Integer status;
+@Service
+public class QuestionService {
+
+    public List<Question> getAllQuestions() {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    public List<Question> getUserQuestions(String userName) {
+	// TODO Auto-generated method stub
+	return null;
+    }
 }

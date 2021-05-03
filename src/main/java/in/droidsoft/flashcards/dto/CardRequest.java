@@ -1,5 +1,5 @@
 /*******************************************************************************************************************************
-ApiResponseObject.java
+CardRequest.java
 
 Copyright © 2021, DroidSoft Corporation. All rights reserved.
 The Programs (which include both the software and documentation) contain proprietary information of DroidSoft Corporation;
@@ -15,25 +15,31 @@ reproduced or transmitted in any form or by any means, electronic or mechanical,
 written permission of DroidSoft Corporation.
 
 Author : ymohammad
-Date   : Apr 25, 2021
+Date   : Apr 28, 2021
 
 Last modified by : ymohammad
-Last modified on : Apr 25, 2021
+Last modified on : Apr 28, 2021
 
 *******************************************************************************************************************************/
 
 package in.droidsoft.flashcards.dto;
 
+import in.droidsoft.flashcards.model.question.Question;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
-* Class ApiResponseObject
+* Class CardRequest
 */
 @Data
-@NoArgsConstructor
-public class ApiResponseObject {
-    private String msg;
-    private Object data;
-    private Integer status;
+public class CardRequest {
+    
+    private String categoryName;
+    private Integer sequence;
+    private String cardTypeCode;
+    
+    //Question Info
+    private Question question;
+    private String answer;
+    private Integer isFavourite;
+    private String userName;
 }

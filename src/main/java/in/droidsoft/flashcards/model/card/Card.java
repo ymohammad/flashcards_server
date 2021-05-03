@@ -34,6 +34,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import in.droidsoft.flashcards.model.category.Category;
 import in.droidsoft.flashcards.model.question.Question;
 import lombok.Data;
@@ -52,21 +54,31 @@ public class Card implements Serializable {
     
     @Id
     @Column(name = "card_id")
+    @JsonIgnore
     private Long cardId;
     
+    @Column(name = "category_id")
+    private Long categoryId;
+    
+    @Column(name = "question_id")
+    private Long questionId;
+    
+    @Column(name = "type")
+    private Long cardTypeId;
+    
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="category_id", referencedColumnName = "category_id" )
+    @JoinColumn(name="category_id", referencedColumnName = "category_id", insertable=false, updatable=false)
     private Category category;
     
     @Column(name = "sequence")
     private Integer sequence;
     
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="type", referencedColumnName = "card_type_id")
+    @JoinColumn(name="type", referencedColumnName = "card_type_id", insertable=false, updatable=false)
     private CardType cardType;
     
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "question_id", referencedColumnName="question_id")
+    @JoinColumn(name = "question_id", referencedColumnName="question_id", insertable=false, updatable=false)
     private Question questions;
     
     @Column(name = "answer")
